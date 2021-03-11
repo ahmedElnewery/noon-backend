@@ -2,7 +2,7 @@ const express = require("express")
 const dotenv = require('dotenv')
 const connectDB = require("./config/connectDB")
 
-const productRouter = require("./router/productRouter")
+const productRouter = require("./router/ProductRouter")
 const { notFound } = require("./middleware/notFound")
 const app = express()
 dotenv.config()
