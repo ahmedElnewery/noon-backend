@@ -13,7 +13,6 @@ userSchema.set('toJSON', {
     virtuals: true,
     versionKey:false,
     transform: function (doc, ret) { // remove id and hash from api
-        delete ret._id;
         delete ret.hash;
     }
 })

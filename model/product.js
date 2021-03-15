@@ -25,7 +25,7 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
+      type: [String],
       required: true,
     },
     brand: {
@@ -36,11 +36,14 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    subCategeory:{
+      type: String,
+      required: true,
+    },
     description: {
       type: String,
       required: true,
     },
-    review: [reviewSchema],
     countInStock: {
       type: Number,
       required: true,
@@ -51,6 +54,7 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    review: [reviewSchema],
     rating: {
       type: Number,
       required: true,
@@ -61,6 +65,14 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    size:String,
+    material:String,
+    color:String,
+    noOfHDMI:Number,
+  noOfUsb:Number,
+  
+
+
   },
   {
     timestamps: true,

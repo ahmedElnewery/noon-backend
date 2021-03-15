@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllProducts,getProductById} = require('../controllers/ProductController');
+const { getAllProducts,getProductById,addProduct} = require('../controllers/ProductController');
 const router = express.Router()
 
 
@@ -12,6 +12,9 @@ router.get("/",getAllProducts)
 //GET Method
 //public
 router.get("/:id",getProductById)
-
+//ENDPOINT: /api/products/
+//POT Method
+//public -- it should canged to protected route
+router.post("/",addProduct)
 module.exports = router
 

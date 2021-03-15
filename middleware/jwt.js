@@ -5,12 +5,12 @@ module.exports = jwt;
 
 function jwt() {
     const secret = process.env.secret;
-    console.log(secret);
+   
     return expressJwt({ secret, algorithms: ['HS256'], isRevoked }).unless({
         path: [
             // routes dont share in auth ( such home page )
             '/api/products',
-            '/api/products/:id',
+            /^\/api\/products\/.*/,
             '/api/users/authenticate',
             '/api/users/register'
         ]

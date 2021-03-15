@@ -4,7 +4,8 @@ function connectDB() {
         .connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useFindAndModify: false
+            useFindAndModify: false,
+            useCreateIndex:true
 
         })
         .then(() => {

@@ -14,11 +14,11 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express()
 dotenv.config()
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 app.use(cors());
 app.use(jwt());
-// app.use(express.json());
+app.use(express.json());
 
 app.use('/api/products',productRouter)
 app.use('/api/users',userRouter)
