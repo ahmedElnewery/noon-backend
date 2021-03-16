@@ -1,7 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User =require("../model/user");
+const User = require("../model/user");
 
 
 
@@ -14,8 +14,8 @@ module.exports = {
     remove
 };
 
-async function authenticate({ username, password }) {
-    const user = await User.findOne({ username });
+async function authenticate({ email, password }) {
+    const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.hash)) {
         const token = jwt.sign({ sub: user.id }, process.env.secret, { expiresIn: '1h' });
         return {
@@ -34,14 +34,14 @@ async function getById(id) {
 }
 
 async function create(userParam) { // userParam => req.body
-    if (await User.findOne({ username: userParam.username })) {
-        throw 'Username "' + userParam.username + '" is already taken';
+    if (await User.findOne({ email: userParam.email })) {
+        throw 'email "' + userParam.email + '" is already taken';
     }
-    
-    console.log("Create" + userParam.username);
+
+    console.log("Create" + userParam.email);
     const user = new User(userParam);
     console.log("Create" + user);
-    
+
     if (userParam.password) {
         user.hash = bcrypt.hashSync(userParam.password, 10);
     }
@@ -53,8 +53,8 @@ async function update(id, userParam) {
     const user = await User.findById(id);
 
     if (!user) throw 'User not found';
-    if (user.username !== userParam.username && await User.findOne({ username: userParam.username })) {
-        throw 'Username "' + userParam.username + '" is already taken';
+    if (user.email !== userParam.email && await User.findOne({ email: userParam.email })) {
+        throw 'email "' + userParam.email + '" is already taken';
     }
 
     if (userParam.password) {
