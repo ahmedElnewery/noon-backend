@@ -1,25 +1,7 @@
-const mongoose = require("mongoose")
-const reviewSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  comment: {
-    type: String,
-    required: true,
-  },
-})
+const mongoose = require("mongoose");
+
 const productSchema = mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   ref: "User",
-    // },
     name: {
       type: String,
       required: true,
@@ -32,14 +14,6 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
-      type: String,
-      required: true,
-    },
-    subCategeory:{
-      type: String,
-      required: true,
-    },
     description: {
       type: String,
       required: true,
@@ -47,14 +21,26 @@ const productSchema = mongoose.Schema(
     countInStock: {
       type: Number,
       required: true,
-      default: 0,
+      min: 0,
     },
     price: {
       type: Number,
       required: true,
-      default: 0,
+      min: 0,
     },
-    review: [reviewSchema],
+    category: {
+      type: String,
+      required: true,
+    },
+    subcategory: {
+      type: String,
+      required: true,
+    },
+    overview: {
+      type: String,
+      required: true,
+    },
+
     rating: {
       type: Number,
       required: true,
@@ -65,18 +51,43 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    size:String,
-    material:String,
-    color:String,
-    noOfHDMI:Number,
-  noOfUsb:Number,
-  
+    discount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    //>>fashion
+    size: String,
+    material: String,
+    color: String,
 
-
+    //>> electronics
+    //(mobiles)
+    screenSize: String,
+    internalMemory: String,
+    battery: String,
+    //(labtops)
+    operatingSystem: String,
+    memorySize: String,
+    proccessor: String,
+    //(tv)
+    tvScreenSize: String,
+    noOfUsbPort: String,
+    //>> home
+    //(kitchen,homeDecore)
+    baseMaterial: String,
+    //>> health& beauty
+    //(makeup)
+    foundation: String,
+    //(skinCare)
+    skinType: String,
+    //(tv)
+    hairType: String,
+    formulation: String,
   },
   {
     timestamps: true,
   }
-)
-const Product = mongoose.model("Product", productSchema)
-module.exports = Product
+);
+const Product = mongoose.model("Product", productSchema);
+module.exports = Product;
