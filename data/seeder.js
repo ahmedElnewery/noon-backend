@@ -14,10 +14,10 @@ const before = (subcategory) => {
         
           const images = {
             image: [
-              `../../../../assets/Img/products/${subcategory}/${i + 1}/1.jpg`,
-              `../../../../assets/Img/products/${subcategory}/${i + 1}/2.jpg`,
-              `../../../../assets/Img/products/${subcategory}/${i + 1}/3.jpg`,
-              `../../../../assets/Img/products/${subcategory}/${i + 1}/4.jpg`,
+              `../../../assets/Img/products/${subcategory}/${i + 1}/1.jpg`,
+              `../../../assets/Img/products/${subcategory}/${i + 1}/2.jpg`,
+              `../../../assets/Img/products/${subcategory}/${i + 1}/3.jpg`,
+              `../../../assets/Img/products/${subcategory}/${i + 1}/4.jpg`,
             ],
           };
           pro.image = images.image;
