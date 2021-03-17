@@ -32,11 +32,11 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
+    categeroy: {
       type: String,
       required: true,
     },
-    subCategeory:{
+    subCategeory: {
       type: String,
       required: true,
     },
@@ -65,12 +65,12 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    size:String,
-    material:String,
-    color:String,
-    noOfHDMI:Number,
-  noOfUsb:Number,
-  
+    size: String,
+    material: String,
+    color: String,
+    noOfHDMI: Number,
+    noOfUsb: Number,
+
 
 
   },

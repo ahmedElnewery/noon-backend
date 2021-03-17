@@ -23,4 +23,12 @@ function addProduct(req, res, next) {
     .catch((err) => next(err));
 }
 
-module.exports = { getAllProducts, getProductById ,addProduct};
+// function to get products by category
+function getProductByCategory(req, res, next) {
+  productService
+    .getProductByCategory(req.params.category)
+    .then((products) => res.json(products))
+    .catch((err) => next(err));
+}
+
+module.exports = { getAllProducts, getProductById, addProduct, getProductByCategory };
