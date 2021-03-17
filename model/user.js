@@ -2,7 +2,7 @@
 const mongoose = require("mongoose")
 const userSchema = mongoose.Schema(
   {
-    username: { type: String, unique: true, required: true },
+    email: { type: String, unique: true, required: true },
     hash: { type: String, required: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -10,11 +10,11 @@ const userSchema = mongoose.Schema(
   }
 )
 userSchema.set('toJSON', {
-    virtuals: true,
-    versionKey:false,
-    transform: function (doc, ret) { // remove id and hash from api
-        delete ret.hash;
-    }
+  virtuals: true,
+  versionKey: false,
+  transform: function (doc, ret) { // remove id and hash from api
+    delete ret.hash;
+  }
 })
 
 const User = mongoose.model("User", userSchema)
