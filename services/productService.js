@@ -28,7 +28,7 @@ async function getProductById(id) {
 
 // function to get all products by category
 async function getProductByCategory(category) {
-  return await Product.find({ categeroy: category })
+  return await Product.find({ category: category })
 }
 
 module.exports = { addProduct, getAllProducts, getProductById, getProductByCategory };

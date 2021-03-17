@@ -1,18 +1,21 @@
 const expressJwt = require('express-jwt');
 const userService = require('../services/userService');
+const {pathToRegexp} = require('path-to-regexp');
 
 module.exports = jwt;
 
 function jwt() {
     const secret = process.env.secret;
-   
+
     return expressJwt({ secret, algorithms: ['HS256'], isRevoked }).unless({
         path: [
             // routes dont share in auth ( such home page )
             '/api/products',
-            /^\/api\/products\/.*/,
             '/api/users/authenticate',
-            '/api/users/register'
+            '/api/users/register',
+            pathToRegexp('/api/products/:id'),
+            pathToRegexp('/api/products/bycategory/:category'),
+
         ]
     });
 }

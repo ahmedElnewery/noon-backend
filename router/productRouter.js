@@ -3,14 +3,10 @@ const { getAllProducts, getProductById, addProduct, getProductByCategory } = req
 const router = express.Router()
 
 
-//ENDPOINT: /api/products/
-//GET Method
-//public
-router.get("/", getAllProducts)
 
 //ENDPOINT: /api/products/categoryValue
 //GET Method
-router.get("/:category", getProductByCategory)
+router.get("/bycategory/:category", getProductByCategory)
 
 //ENDPOINT: /api/products/
 //GET Method
@@ -21,6 +17,10 @@ router.get("/:id", getProductById)
 //public -- it should canged to protected route
 router.post("/", addProduct)
 
+//ENDPOINT: /api/products/
+//GET Method
+//public
+router.get("/", getAllProducts)
 
 
 module.exports = router
