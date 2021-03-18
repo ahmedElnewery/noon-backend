@@ -1,4 +1,7 @@
+const { response } = require("express");
 const Product = require("../model/product");
+const Cart = require("../model/cart");
+const router = require("../router/ProductRouter");
 
 function getAllProducts(req, res) {
   Product.find({}, (err, products) => {
@@ -19,4 +22,17 @@ function getProductById(req, res) {
     }
   });
 }
-module.exports = { getAllProducts, getProductById };
+function addToCard(req,res,next){
+  var productId=req.params.id;
+  var cart=new Cart(req.session.cart? req.session.cart: {items:{}});
+  product.findById(productId,function(err,product){
+    if(err){
+      return response.redirect('/');
+    }
+    cart.add(product,product.id);
+    req.session.cart=cart;
+    console.log(req.session.cart);
+    res.redirect('/');
+  });
+}
+module.exports = { getAllProducts, getProductById,addToCard };
