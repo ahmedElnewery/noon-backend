@@ -30,5 +30,9 @@ async function getProductById(id) {
 async function getProductByCategory(category) {
   return await Product.find({ category: category })
 }
+// function to get all products by subcategory
+async function getProductBySubcategory(subcategory) {
+  return await Product.find({ subcategory: subcategory })
+}
 
-module.exports = { addProduct, getAllProducts, getProductById, getProductByCategory };
+module.exports = { addProduct, getAllProducts, getProductById, getProductByCategory ,getProductBySubcategory};

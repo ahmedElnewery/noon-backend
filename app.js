@@ -22,7 +22,6 @@ app.use(express.json());
 
 app.use('/api/products',productRouter)
 app.use('/api/users',userRouter)
-// app.use('/api/users', require('./controllers/UserController'));
 app.use('/',errorHandler);
 // app.use('/',notFound)
 

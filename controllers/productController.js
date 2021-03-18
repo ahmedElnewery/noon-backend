@@ -30,5 +30,13 @@ function getProductByCategory(req, res, next) {
     .then((products) => res.json(products))
     .catch((err) => next(err));
 }
+// function to get products by subcategory
+function getProductBySubcategory(req, res, next) {
+  productService
+    .getProductBySubcategory(req.params.subcategory)
+    .then((products) => res.json(products))
+    .catch((err) => next(err));
+}
 
-module.exports = { getAllProducts, getProductById, addProduct, getProductByCategory };
+
+module.exports = { getAllProducts, getProductById, addProduct, getProductByCategory,getProductBySubcategory };

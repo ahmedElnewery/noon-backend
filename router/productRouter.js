@@ -1,11 +1,12 @@
 const express = require('express');
-const { getAllProducts, getProductById, addProduct, getProductByCategory } = require('../controllers/ProductController');
+const { getAllProducts, getProductById, addProduct, getProductByCategory,getProductBySubcategory } = require('../controllers/ProductController');
 const router = express.Router()
 
 
 
 //ENDPOINT: /api/products/categoryValue
 //GET Method
+router.get("/bysubcategory/:subcategory", getProductBySubcategory)
 router.get("/bycategory/:category", getProductByCategory)
 
 //ENDPOINT: /api/products/
