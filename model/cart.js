@@ -4,7 +4,7 @@ module.exports=function Cart(oldCart){
     this.items=oldCart.items|| {};
     this.totalQty=oldCart.totalQty|| 0;
     this.totalPrice=oldCart.totalPrice|| 0;   
-}
+
 this.add=function(item,id){
     var storedItem=this.items[id];
     if (!storedItem){
@@ -22,5 +22,4 @@ this.generateArray=function(){
     }
     return arr;
 };
-const Cart = mongoose.model("Product", productSchema)
-module.exports = Cart
+}

@@ -22,7 +22,8 @@ function getProductById(req, res) {
     }
   });
 }
-function addToCard(req,res,next){
+
+function addToCard(req,res){
   var productId=req.params.id;
   var cart=new Cart(req.session.cart? req.session.cart: {items:{}});
   product.findById(productId,function(err,product){
@@ -34,5 +35,6 @@ function addToCard(req,res,next){
     console.log(req.session.cart);
     res.redirect('/');
   });
+ 
 }
 module.exports = { getAllProducts, getProductById,addToCard };
