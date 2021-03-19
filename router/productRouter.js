@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllProducts, getProductById, addProduct, getProductByCategory,getProductBySubcategory } = require('../controllers/ProductController');
+const { getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory } = require('../controllers/ProductController');
 const router = express.Router()
 
 
@@ -23,6 +23,7 @@ router.post("/", addProduct)
 //public
 router.get("/", getAllProducts)
 
+router.get('/add-to-cart/:id',addToCard)
 
 module.exports = router
 

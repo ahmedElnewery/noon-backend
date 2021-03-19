@@ -37,6 +37,18 @@ function getProductBySubcategory(req, res, next) {
     .then((products) => res.json(products))
     .catch((err) => next(err));
 }
+function addToCard(req,res,next){
+  var productId=req.params.id;
+  var cart=new Cart(req.session.cart? req.session.cart: {items:{}});
+  product.findById(productId,function(err,product){
+    if(err){
+      return response.redirect('/');
+    }
+    cart.add(product,product.id);
+    req.session.cart=cart;
+    console.log(req.session.cart);
+    res.redirect('/');
+  });
+}
 
-
-module.exports = { getAllProducts, getProductById, addProduct, getProductByCategory,getProductBySubcategory };
+module.exports = { getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory };

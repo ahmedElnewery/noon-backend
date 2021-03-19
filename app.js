@@ -2,7 +2,8 @@ require('rootpath')();
 const express = require("express")
 const dotenv = require('dotenv')
 const connectDB = require("./config/connectDB")
-
+const session=require('express-session')
+/*var Mongotore=require("connect-mongo")(session)*/
 const productRouter = require("./router/ProductRouter")
 const userRouter = require("./router/userRouter")
 
@@ -19,7 +20,7 @@ dotenv.config()
 app.use(cors());
 app.use(jwt());
 app.use(express.json());
-
+app.use(session({secret:'mysupersecret',resave:false,saveUninitialized:false}));
 app.use('/api/products',productRouter)
 app.use('/api/users',userRouter)
 app.use('/',errorHandler);
