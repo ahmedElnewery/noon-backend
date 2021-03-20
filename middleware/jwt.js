@@ -13,9 +13,11 @@ function jwt() {
             '/api/products',
             '/api/users/authenticate',
             '/api/users/register',
+            '/api/filter/category',
             pathToRegexp('/api/products/:id'),
             pathToRegexp('/api/products/bycategory/:category'),
             pathToRegexp('/api/products/bysubcategory/:subcategory'),
+             pathToRegexp( '/api/filter/subcategory/:cateid')
 
         ]
     });
