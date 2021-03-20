@@ -1,8 +1,10 @@
 const dotenv = require("dotenv");
 const connectDB = require("../config/connectDB");
 const Product = require("../model/product");
+const Category=require("../model/category");
+const SubCategory=require("../model/subcategory");
 const products = require("./products");
-
+const {category,subcategory}=require("./category")
 dotenv.config();
 connectDB();
 
@@ -49,5 +51,30 @@ function importData (){
       process.exit(0);
     }
   });
+  Category.insertMany(category, (err, data) => {
+    if (err) {
+      console.error("Error in importing Data",err);
+      process.exit(1);
+    } else {
+      console.log("successfully import data");
+      process.exit(0);
+    }
+  });
+  SubCategory.insertMany(subcategory, (err, data) => {
+    if (err) {
+      console.error("Error in importing Data",err);
+      process.exit(1);
+    } else {
+      console.log("successfully import data");
+      process.exit(0);
+    }
+  });
 }
 importData();
+
+
+
+
+
+
+

@@ -6,7 +6,7 @@ const session=require('express-session')
 const MongoStore = require('connect-mongo');
 const productRouter = require("./router/ProductRouter")
 const userRouter = require("./router/userRouter")
-
+const filterRouter=require("./router/filterRouter")
 //user
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -31,6 +31,7 @@ app.use(session({
 // app.use(session({secret:'mysupersecret',resave:false,saveUninitialized:false}));
 app.use('/api/products',productRouter)
 app.use('/api/users',userRouter)
+app.use('/api/filter',filterRouter)
 app.use('/',errorHandler);
 // app.use('/',notFound)
 
