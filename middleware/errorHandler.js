@@ -1,5 +1,6 @@
 
 function errorHandler(err, req, res, next) {
+    console.log(err)
     if (typeof (err) === 'string') {
         // any error
         return res.status(400).json({ message: err });

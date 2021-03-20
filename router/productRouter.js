@@ -1,6 +1,7 @@
 const express = require('express');
 const { getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory } = require('../controllers/ProductController');
-
+const {addReview} = require("../controllers/reviewController");
+const { auth } = require('../middleware/authMiddleware');
 
 const router = express.Router()
 
@@ -26,6 +27,13 @@ router.post("/", addProduct)
 router.get("/", getAllProducts)
 
 router.get('/add-to-cart/:id',addToCard)
+
+//ADD Review
+//ENDPOINT: /api/products/:id/reviews
+//Post Method
+//private
+router.post("/:id/reviews",auth,addReview)
+
 
 module.exports = router
 

@@ -17,9 +17,8 @@ dotenv.config()
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
-app.use(cors());
-app.use(jwt());
 app.use(express.json());
+app.use(cors());
 app.use(session({
     secret: 'mysupersecret',
     resave:false,
@@ -28,7 +27,7 @@ app.use(session({
         mongoUrl: process.env.MONGO_URL,
     })
   }));
-// app.use(session({secret:'mysupersecret',resave:false,saveUninitialized:false}));
+
 app.use('/api/products',productRouter)
 app.use('/api/users',userRouter)
 app.use('/api/filter',filterRouter)

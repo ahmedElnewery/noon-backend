@@ -17,7 +17,8 @@ module.exports = {
 async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
     if (user && bcrypt.compareSync(password, user.hash)) {
-        const token = jwt.sign({ sub: user.id }, process.env.secret, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.secret, { expiresIn: '1h' });
+        
         return {
             ...user.toJSON(),
             token
@@ -38,7 +39,6 @@ async function create(userParam) { // userParam => req.body
         throw 'email "' + userParam.email + '" is already taken';
     }
 
-    console.log("Create" + userParam.email);
     const user = new User(userParam);
     console.log("Create" + user);
 
