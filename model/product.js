@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Review = require("./review");
 
 const productSchema = mongoose.Schema(
   {
@@ -51,6 +52,7 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    reviews:[Review],
     discount: {
       type: Number,
       required: true,
