@@ -15,6 +15,10 @@ function errorHandler(err, req, res, next) {
         // jwt error
         return res.status(401).json({ message: 'Invalid Token' });
     }
+    if (err.name === 'notFound') {
+        // jwt error
+        return res.status(404).json({ message: err.message });
+    }
     
     // 500 server error
     return res.status(500).json({ message: err.message });
