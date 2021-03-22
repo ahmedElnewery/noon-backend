@@ -22,7 +22,7 @@ async function getAllProducts() {
 
 }
 async function getProductById(id) {
-  return await Product.findById(id)
+  return await (await Product.findById(id).populate('reviews.reviewer')).execPopulate()
 
 }
 
