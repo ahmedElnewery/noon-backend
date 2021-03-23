@@ -28,9 +28,9 @@ router.get("/", getAllProducts)
 
 router.get('/add-to-cart/:id',addToCard)
 
-router.post('/cart', postCart);
-router.get('/getcard',getCart )
-router.post('/cart-delete-item', postCartDeleteProduct);
+router.post('/cart',auth ,postCart);
+router.get('/getcard',auth,getCart )
+router.post('/cart-delete-item',auth, postCartDeleteProduct);
 postCartDeleteProduct
 
 //ADD Review

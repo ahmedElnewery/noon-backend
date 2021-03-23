@@ -1,6 +1,6 @@
 const productService = require("./../services/productService");
 const Cart=require("../model/card")
-const product = require("../model/product");
+const Product = require("../model/product");
 function getProductById(req, res, next) {
   productService
     .getProductById(req.params.id)
@@ -31,8 +31,8 @@ function addProduct(req, res, next) {
       return req.user.addToCart(product);
     })
     .then(result => {
-      console.log(result);
-      res.redirect('/');
+      res.send(result).status(200)
+      // res.redirect('/');
     });
 };
 
@@ -51,7 +51,7 @@ function postCartDeleteProduct  (req, res) {
   req.user
     .removeFromCart(prodId)
     .then(result => {
-      res.redirect('/');
+      // res.redirect('/');
     })
     .catch(err => console.log(err));
 };

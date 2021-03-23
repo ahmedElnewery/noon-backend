@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema(
       items: [
         {
           productId: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
             required: true
           },
@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema(
       updatedCartItems[cartProductIndex].quantity = newQuantity;
     } else {
       updatedCartItems.push({
-        productId: product._id,
+        productId: mongoose.Types.ObjectId(product._id),
         quantity: newQuantity
       });
     }
