@@ -17,4 +17,7 @@ async function getProductByCategory(category) {
   async function getSubCategoryByCateid(cateid){
       return await SubCategory.find({cateid:cateid})
   }
-  module.exports={getAllCategory,getProductByCategory,getProductBySubcategory,getSubCategoryByCateid}
+  async function getSubCategoryBySubcategoryName(subcategoryName){
+    return await SubCategory.find({name:subcategoryName})
+  }
+  module.exports={getSubCategoryBySubcategoryName,getAllCategory,getProductByCategory,getProductBySubcategory,getSubCategoryByCateid}

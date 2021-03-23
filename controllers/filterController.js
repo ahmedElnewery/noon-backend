@@ -24,4 +24,9 @@ filterService.getSubCategoryByCateid(req.params.cateid)
 .then((subcategory)=>res.json(subcategory)).catch((err) => next(err));
 
   }
-  module.exports={getAllCategory,getProductByCategory,getProductBySubcategory,getSubCategoryByCateid}
+  function getSubCategoryBySubcategoryName(req,res,next){
+    filterService.getSubCategoryBySubcategoryName(req.params.subcategory)
+    .then((subcategory)=>res.json(subcategory)).catch((err) => next(err));
+    
+      }
+  module.exports={getSubCategoryBySubcategoryName,getAllCategory,getProductByCategory,getProductBySubcategory,getSubCategoryByCateid}
