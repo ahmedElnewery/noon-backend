@@ -23,9 +23,42 @@ function addProduct(req, res, next) {
     .then((product) => res.json(product))
     .catch((err) => next(err));
 }
+//////////////////////////card///////////////////////////////////////////////////////////
+ function postCart (req, res, next) {
+  const prodId = req.body.productId;
+  Product.findById(prodId)
+    .then(product => {
+      return req.user.addToCart(product);
+    })
+    .then(result => {
+      console.log(result);
+      res.redirect('/');
+    });
+};
 
+function getCart(req, res) {
+  req.user
+    .populate('cart.items.productId')
+    .execPopulate()
+    .then(user => {
+      const products = user.cart.items;
+      res.json( {products: products });
+    })
+    .catch(err => console.log(err));
+};
+function postCartDeleteProduct  (req, res) {
+  const prodId = req.body.productId;
+  req.user
+    .removeFromCart(prodId)
+    .then(result => {
+      res.redirect('/');
+    })
+    .catch(err => console.log(err));
+};
+
+///////////////////////////////////////////////////////////////////////////
 // function to get products by category
-function getProductByCategory(req, res, next) {
+function getProductByCategory(req, res) {
   productService
     .getProductByCategory(req.params.category)
     .then((products) => res.json(products))
@@ -70,4 +103,4 @@ function generateArray(req,res){
    res.json(req.session.cart);
 }
 
-module.exports = {generateArray, getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory };
+module.exports = {generateArray,postCartDeleteProduct,  getCart, postCart ,getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory };
