@@ -7,6 +7,7 @@ function authenticate(req, res, next) {
         .catch(err => next(err));
 }
 
+
 function register(req, res, next) {
     userService.create(req.body)
         .then((user) => res.json(user))
@@ -42,5 +43,7 @@ function remove(req, res, next) {
         .then(() => res.json({}))
         .catch(err => next(err));
 }
+
+
 
 module.exports = { authenticate, register, getAll, getCurrent, getById, update, remove };
