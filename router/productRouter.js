@@ -1,6 +1,8 @@
 const express = require('express');
 const { generateArray, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder } = require('../controllers/ProductController');
 const { addReview } = require("../controllers/reviewController");
+const { generateArray, getCart, postCartDeleteProduct, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory } = require('../controllers/ProductController');
+const { addReview } = require("../controllers/reviewController");
 const { auth } = require('../middleware/authMiddleware');
 
 const router = express.Router()
@@ -27,6 +29,11 @@ router.post("/", addProduct)
 router.get("/", getAllProducts)
 
 router.get('/add-to-cart/:id', addToCard)
+
+router.post('/cart', auth, postCart);
+router.get('/getcard', auth, getCart)
+router.post('/cart-delete-item', auth, postCartDeleteProduct);
+postCartDeleteProduct
 
 //ADD Review
 //ENDPOINT: /api/products/:id/reviews

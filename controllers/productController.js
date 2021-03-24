@@ -2,6 +2,8 @@ const productService = require("./../services/productService");
 const Cart = require("../model/card")
 const Order = require("../model/order");
 const product = require("../model/product");
+const Cart = require("../model/card")
+const Product = require("../model/product");
 function getProductById(req, res, next) {
   productService
     .getProductById(req.params.id)
@@ -24,9 +26,42 @@ function addProduct(req, res, next) {
     .then((product) => res.json(product))
     .catch((err) => next(err));
 }
+//////////////////////////card///////////////////////////////////////////////////////////
+function postCart(req, res, next) {
+  const prodId = req.body.productId;
+  Product.findById(prodId)
+    .then(product => {
+      return req.user.addToCart(product);
+    })
+    .then(result => {
+      res.send(result).status(200)
+      // res.redirect('/');
+    });
+};
 
+function getCart(req, res) {
+  req.user
+    .populate('cart.items.productId')
+    .execPopulate()
+    .then(user => {
+      const products = user.cart.items;
+      res.json({ products: products });
+    })
+    .catch(err => console.log(err));
+};
+function postCartDeleteProduct(req, res) {
+  const prodId = req.body.productId;
+  req.user
+    .removeFromCart(prodId)
+    .then(result => {
+      // res.redirect('/');
+    })
+    .catch(err => console.log(err));
+};
+
+///////////////////////////////////////////////////////////////////////////
 // function to get products by category
-function getProductByCategory(req, res, next) {
+function getProductByCategory(req, res) {
   productService
     .getProductByCategory(req.params.category)
     .then((products) => res.json(products))
@@ -102,3 +137,4 @@ function addOrder(req, resp, next) {
 };
 
 module.exports = { generateArray, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder };
+module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory };
