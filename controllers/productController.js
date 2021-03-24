@@ -1,8 +1,6 @@
 const productService = require("./../services/productService");
 const Cart = require("../model/card")
 const Order = require("../model/order");
-const product = require("../model/product");
-const Cart = require("../model/card")
 const Product = require("../model/product");
 function getProductById(req, res, next) {
   productService
@@ -114,8 +112,8 @@ function addOrder(req, resp, next) {
     .execPopulate()
     .then(user => {
       //console.warn(user);
-      console.warn(req.user);
-      console.warn(user.cart.items.map(i => console.warn(i)));
+      console.warn(user.cart.items);
+      // console.warn(user.cart.items.map(i => console.warn(i)));
       const prods = user.cart.items.map(item => {
         return { quantity: item.quantity, product: item.productId };
       });
@@ -136,5 +134,4 @@ function addOrder(req, resp, next) {
 
 };
 
-module.exports = { generateArray, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder };
-module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory };
+module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory,addOrder };

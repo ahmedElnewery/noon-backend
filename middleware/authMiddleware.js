@@ -13,7 +13,6 @@ const auth = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.secret);
       req.user = await User.findById(decoded.id).select("-hash");
-      console.log(decoded)
       next();
     } catch (error) {
       console.error(error);
