@@ -111,27 +111,29 @@ function addOrder(req, resp, next) {
     .populate("cart.items.productId")
     .execPopulate()
     .then(user => {
-      //console.warn(user);
       console.warn(user.cart.items);
-      // console.warn(user.cart.items.map(i => console.warn(i)));
       const prods = user.cart.items.map(item => {
-        return { quantity: item.quantity, product: item.productId };
+        return { quantity: item.quantity, product: { ...item.productId._doc } };
       });
       //console.warn(prods);
       const order = new Order({
         user: {
-          name: req.user.name,
+          //name: req.user.name,
           userId: req.user
         },
-        products: prods
+        products: prods,
+        clientInfo: req.body.clientInfo,
+        paymentMethod: req.body.paymentMethod,
+        paymentStatus: req.body.paymentStatus,
+        deliveryOptions: req.body.deliveryOptions,
+        totalPrice: req.body.totalPrice,
+        isDelivered: req.body.isDelivered,
       });
       return order.save();
     })
-    .then(() => {
-      //req.redirect('/orders');
-    })
+    .then((order) => resp.json(order))
     .catch(err => console.warn(err));
 
 };
 
-module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory,addOrder };
+module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder };

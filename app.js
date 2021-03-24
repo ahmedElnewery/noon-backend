@@ -33,7 +33,7 @@ app.use(session({
 app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/filter', filterRouter)
-//app.use('/api/orders', orderRouter)
+app.use('/api/orders', orderRouter)
 app.use('/', errorHandler);
 // app.use('/',notFound)
 
