@@ -1,5 +1,6 @@
 const productService = require("./../services/productService");
-const Cart=require("../model/card")
+const Cart = require("../model/card")
+const Order = require("../model/order");
 const product = require("../model/product");
 function getProductById(req, res, next) {
   productService
@@ -38,9 +39,9 @@ function getProductBySubcategory(req, res, next) {
     .then((products) => res.json(products))
     .catch((err) => next(err));
 }
-function addToCard(req,res,next){
-  var productId=req.params.id;
-  var cart=new Cart(req.session.cart? req.session.cart: {items:{}});
+function addToCard(req, res, next) {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : { items: {} });
   // product.findById(productId,function(err,product){
   //   if(err){
   //     return response.redirect('/');
@@ -51,23 +52,53 @@ function addToCard(req,res,next){
   //   res.redirect('/');
   // });
   productService.getProductById(productId).then(
-(product)=>{
-  cart.add(product,product.id);
-    req.session.cart=cart;
-    res.json(req.session.cart);
-    console.log(req.session.cart);
-}
+    (product) => {
+      cart.add(product, product.id);
+      req.session.cart = cart;
+      res.json(req.session.cart);
+      console.log(req.session.cart);
+    }
 
   ).catch(
     (err) => next(err)
   )
 }
-function generateArray(req,res){
-  if(!req.session.cart){
-     res.json({});
+function generateArray(req, res) {
+  if (!req.session.cart) {
+    res.json({});
   }
   // var cart=new Cart(req.session.cart);
-   res.json(req.session.cart);
+  res.json(req.session.cart);
 }
 
-module.exports = {generateArray, getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory };
+
+// function to add new order
+function addOrder(req, resp, next) {
+  req.user
+    .populate("cart.items.productId")
+    .execPopulate()
+    .then(user => {
+      //console.warn(user);
+      console.warn(req.user);
+      console.warn(user.cart.items.map(i => console.warn(i)));
+      const prods = user.cart.items.map(item => {
+        return { quantity: item.quantity, product: item.productId };
+      });
+      //console.warn(prods);
+      const order = new Order({
+        user: {
+          name: req.user.name,
+          userId: req.user
+        },
+        products: prods
+      });
+      return order.save();
+    })
+    .then(() => {
+      //req.redirect('/orders');
+    })
+    .catch(err => console.warn(err));
+
+};
+
+module.exports = { generateArray, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder };

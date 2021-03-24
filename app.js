@@ -2,11 +2,13 @@ require('rootpath')();
 const express = require("express")
 const dotenv = require('dotenv')
 const connectDB = require("./config/connectDB")
-const session=require('express-session')
+const session = require('express-session')
 const MongoStore = require('connect-mongo');
 const productRouter = require("./router/ProductRouter")
 const userRouter = require("./router/userRouter")
-const filterRouter=require("./router/filterRouter")
+const filterRouter = require("./router/filterRouter")
+const orderRouter = require("./router/orderRouter")
+
 //user
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -21,17 +23,18 @@ app.use(express.json());
 app.use(cors());
 app.use(session({
     secret: 'mysupersecret',
-    resave:false,
-    saveUninitialized:false,
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_URL,
     })
-  }));
+}));
 
-app.use('/api/products',productRouter)
-app.use('/api/users',userRouter)
-app.use('/api/filter',filterRouter)
-app.use('/',errorHandler);
+app.use('/api/products', productRouter)
+app.use('/api/users', userRouter)
+app.use('/api/filter', filterRouter)
+//app.use('/api/orders', orderRouter)
+app.use('/', errorHandler);
 // app.use('/',notFound)
 
 

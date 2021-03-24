@@ -1,6 +1,6 @@
 const express = require('express');
-const { generateArray, getAllProducts, getProductById,addToCard, addProduct, getProductByCategory,getProductBySubcategory } = require('../controllers/ProductController');
-const {addReview} = require("../controllers/reviewController");
+const { generateArray, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder } = require('../controllers/ProductController');
+const { addReview } = require("../controllers/reviewController");
 const { auth } = require('../middleware/authMiddleware');
 
 const router = express.Router()
@@ -26,14 +26,18 @@ router.post("/", addProduct)
 //public
 router.get("/", getAllProducts)
 
-router.get('/add-to-cart/:id',addToCard)
+router.get('/add-to-cart/:id', addToCard)
 
 //ADD Review
 //ENDPOINT: /api/products/:id/reviews
 //Post Method
 //private
-router.post("/:id/reviews",auth,addReview)
+router.post("/:id/reviews", auth, addReview)
 router.get('/shopping-cart', generateArray)
+
+//order router
+//ENDPOINT: /api/products
+router.post('/create-order', auth, addOrder)
 
 module.exports = router
 
