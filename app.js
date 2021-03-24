@@ -8,7 +8,7 @@ const productRouter = require("./router/ProductRouter")
 const userRouter = require("./router/userRouter")
 const filterRouter = require("./router/filterRouter")
 const orderRouter = require("./router/orderRouter")
-
+const cartRouter = require("./router/cartRouter")
 //user
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -19,8 +19,8 @@ dotenv.config()
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json());
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(session({
     secret: 'mysupersecret',
     resave: false,
@@ -34,6 +34,8 @@ app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/filter', filterRouter)
 app.use('/api/orders', orderRouter)
+app.use('/api/cart', cartRouter)
+
 app.use('/', errorHandler);
 // app.use('/',notFound)
 

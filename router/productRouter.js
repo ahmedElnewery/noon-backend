@@ -1,17 +1,12 @@
 const express = require("express");
 
 const {
-  generateArray,
-  getCart,
-  postCartDeleteProduct,
-  postCart,
   getAllProducts,
   getProductById,
   addToCard,
   addProduct,
   getProductByCategory,
   getProductBySubcategory,
-  addOrder
 } = require("../controllers/ProductController");
 const { addReview } = require("../controllers/reviewController");
 const { auth } = require("../middleware/authMiddleware");
@@ -35,21 +30,13 @@ router.post("/", addProduct);
 //ENDPOINT: /api/products/
 //GET Method
 //public
+
 router.get("/", getAllProducts);
-
-router.get("/add-to-cart/:id", addToCard);
-
-router.post("/cart", auth, postCart);
-router.get("/getcard", auth, getCart);
-router.post("/cart-delete-item", auth, postCartDeleteProduct);
-postCartDeleteProduct;
-
 //ADD Review
 //ENDPOINT: /api/products/:id/reviews
 //Post Method
 //private
 router.post("/:id/reviews", auth, addReview);
-router.get("/shopping-cart", generateArray);
 
 
 module.exports = router;

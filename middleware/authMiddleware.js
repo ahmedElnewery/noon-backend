@@ -13,9 +13,10 @@ const auth = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.secret);
       req.user = await User.findById(decoded.id).select("-hash");
+
       next();
     } catch (error) {
-      console.error(error);
+      console.error("helllo");
       res.status(401).json("Not authorized, token failed");
     }
   }
