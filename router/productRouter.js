@@ -51,8 +51,5 @@ postCartDeleteProduct;
 router.post("/:id/reviews", auth, addReview);
 router.get("/shopping-cart", generateArray);
 
-//order router
-//ENDPOINT: /api/products
-router.post("/create-order", auth, addOrder);
 
 module.exports = router;

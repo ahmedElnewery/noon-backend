@@ -1,6 +1,5 @@
 const productService = require("./../services/productService");
 const Cart = require("../model/card")
-const Order = require("../model/order");
 const Product = require("../model/product");
 function getProductById(req, res, next) {
   productService
@@ -104,36 +103,4 @@ function generateArray(req, res) {
   res.json(req.session.cart);
 }
 
-
-// function to add new order
-function addOrder(req, resp, next) {
-  req.user
-    .populate("cart.items.productId")
-    .execPopulate()
-    .then(user => {
-      console.warn(user.cart.items);
-      const prods = user.cart.items.map(item => {
-        return { quantity: item.quantity, product: { ...item.productId._doc } };
-      });
-      //console.warn(prods);
-      const order = new Order({
-        user: {
-          //name: req.user.name,
-          userId: req.user
-        },
-        products: prods,
-        clientInfo: req.body.clientInfo,
-        paymentMethod: req.body.paymentMethod,
-        paymentStatus: req.body.paymentStatus,
-        deliveryOptions: req.body.deliveryOptions,
-        totalPrice: req.body.totalPrice,
-        isDelivered: req.body.isDelivered,
-      });
-      return order.save();
-    })
-    .then((order) => resp.json(order))
-    .catch(err => console.warn(err));
-
-};
-
-module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory, addOrder };
+module.exports = { generateArray, postCartDeleteProduct, getCart, postCart, getAllProducts, getProductById, addToCard, addProduct, getProductByCategory, getProductBySubcategory };
