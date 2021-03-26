@@ -3,9 +3,10 @@ const Product = require("../model/product");
 //////////////////////////card///////////////////////////////////////////////////////////
 function postCart(req, res, next) {
     const prodId = req.body.productId;
+    const qty = req.body.qty;
     Product.findById(prodId)
       .then(product => {
-        return req.user.addToCart(product);
+        return req.user.addToCart(product,qty);
       })
       .then(result => {
         res.send(result).status(200)
