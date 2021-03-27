@@ -1,4 +1,3 @@
-const { response } = require("express");
 const orderService = require("./../services/orderService");
 const Order = require("../model/order");
 
@@ -22,15 +21,18 @@ function addOrder(req, resp, next) {
             });
             //console.warn(prods);
             const order = new Order({
-                user: {
-                    //name: req.user.name,
-                    userId: req.user
-                },
+                // user: {
+                //     //name: req.user.name,
+                //     userId: req.user
+                // },
+                userId: req.user,
                 products: prods,
                 clientInfo: req.body.clientInfo,
                 paymentMethod: req.body.paymentMethod,
                 paymentStatus: req.body.paymentStatus,
-                deliveryOptions: req.body.deliveryOptions,
+                //deliveryOptions: req.body.deliveryOptions,
+                leaveAtHome: req.body.leaveAtHome,
+                getItTogether: req.body.getItTogether,
                 totalPrice: req.body.totalPrice,
                 isDelivered: req.body.isDelivered,
             });
@@ -49,6 +51,14 @@ function getAllOrders(req, res, next) {
         .catch((err) => next(err));
 }
 
+// function to get all orders of specific user
+function getOrdersOfUser(req, res, next) {
+    orderService
+        .getOrdersOfUser(req.body.params)
+        .then((order) => res.json(order))
+        .catch((err) => next(err));
+}
+
 // function to remove specific order
 function removeOrder(req, res, next) {
     orderService
@@ -57,4 +67,4 @@ function removeOrder(req, res, next) {
         .catch((err) => next(err));
 }
 
-module.exports = { addOrder, getAllOrders, removeOrder };
+module.exports = { addOrder, getAllOrders, getOrdersOfUser, removeOrder };

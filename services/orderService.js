@@ -11,9 +11,14 @@ async function getAllOrders() {
     return await Order.find();
 }
 
+// function to get all orders of specific user
+async function getOrdersOfUser(userId) {
+    return await Order.find({ userId: userId });
+}
+
 // function to remove specific order
 async function removeOrder(id) {
     await Order.findByIdAndRemove(id);
 }
 
-module.exports = { getAllOrders, removeOrder };
+module.exports = { getAllOrders, removeOrder, getOrdersOfUser };
