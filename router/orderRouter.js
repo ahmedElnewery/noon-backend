@@ -6,8 +6,8 @@ const router = express.Router()
 
 //ENDPOINT: /api/orders/
 //order router
-router.post("/create-order", auth, addOrder);
 router.get("/getOrders/:userId", getAllOrders)
+router.post("/create-order", auth, addOrder);
 router.get("/", getAllOrders)
 router.delete('/:id', removeOrder);
 

@@ -54,7 +54,7 @@ function getAllOrders(req, res, next) {
 // function to get all orders of specific user
 function getOrdersOfUser(req, res, next) {
     orderService
-        .getOrdersOfUser(req.body.params)
+        .getOrdersOfUser(req.params.userId)
         .then((order) => res.json(order))
         .catch((err) => next(err));
 }
@@ -63,7 +63,7 @@ function getOrdersOfUser(req, res, next) {
 function removeOrder(req, res, next) {
     orderService
         .removeOrder(req.params.id)
-        .then(() => res.json(res))
+        .then((data) => res.json(data))
         .catch((err) => next(err));
 }
 
