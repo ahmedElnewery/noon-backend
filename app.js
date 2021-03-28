@@ -16,6 +16,7 @@ const bodyParser = require('body-parser');
 const jwt = require('./middleware/jwt');
 const errorHandler = require('./middleware/errorHandler');
 const app = express()
+
 dotenv.config()
 
 // app.use(bodyParser.urlencoded({ extended: false }));
