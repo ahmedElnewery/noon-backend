@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now },
+    isAdmin:{type:Boolean, required:true,default:false},
     cart: {
       items: [
         {

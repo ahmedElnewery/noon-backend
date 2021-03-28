@@ -16,7 +16,6 @@ const auth = async (req, res, next) => {
 
       next();
     } catch (error) {
-      console.error("helllo");
       res.status(401).json("Not authorized, token failed");
     }
   }

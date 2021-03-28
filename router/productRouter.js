@@ -9,7 +9,7 @@ const {
   getProductBySubcategory,
 } = require("../controllers/ProductController");
 const { addReview } = require("../controllers/reviewController");
-const { auth } = require("../middleware/authMiddleware");
+const { auth, admin } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -25,7 +25,7 @@ router.get("/:id", getProductById);
 //ENDPOINT: /api/products/
 //POT Method
 //public -- it should canged to protected route
-router.post("/", addProduct);
+router.post("/",auth, admin,addProduct);
 
 //ENDPOINT: /api/products/
 //GET Method

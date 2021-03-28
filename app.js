@@ -9,6 +9,7 @@ const userRouter = require("./router/userRouter")
 const filterRouter = require("./router/filterRouter")
 const orderRouter = require("./router/orderRouter")
 const cartRouter = require("./router/cartRouter")
+const adminRouter = require("./router/adminRouter")
 //user
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -35,6 +36,7 @@ app.use('/api/users', userRouter)
 app.use('/api/filter', filterRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/cart', cartRouter)
+app.use('/api/admin', adminRouter)
 
 app.use('/', errorHandler);
 // app.use('/',notFound)
